@@ -15,6 +15,7 @@ const server = express()
 server.use(helmet())
 server.use(morgan('dev'))
 server.use(cors())
+server.use(express.json())
 
 let currentTime = new Date().toLocaleString()
 
