@@ -1,0 +1,37 @@
+const dotenv = require('dotenv').config()
+const express = require('express')
+const helmet = require('helmet')
+const morgan = require('morgan')
+const cors = require('cors')
+const mongoose = require('mongoose')
+require('colors')
+
+
+const server = express()
+
+server.use(helmet())
+server.use(morgan('dev'))
+server.use(cors())
+
+
+
+
+let currentTime = new Date().toLocaleString()
+
+server.get('/test', (req, res) => {
+    res.status(200).json({
+        status: 200,
+        message: 'Server is live',
+        date: currentTime,
+        author: 'github @rodhent',
+
+    })
+   
+})
+
+const PORT = process.env.PORT || 7000
+
+server.listen(PORT, () => {
+    console.log(`\n **Server is listening on port ${PORT}`.rainbow)
+})
+
