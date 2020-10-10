@@ -4,17 +4,17 @@ const helmet = require('helmet')
 const morgan = require('morgan')
 const cors = require('cors')
 const mongoose = require('mongoose')
+const connectDB = require('./utils/db.js')
+
+const companiesRouter = require('./routes/companies')
+
 require('colors')
 
-
+connectDB()
 const server = express()
-
 server.use(helmet())
 server.use(morgan('dev'))
 server.use(cors())
-
-
-
 
 let currentTime = new Date().toLocaleString()
 
@@ -28,6 +28,8 @@ server.get('/test', (req, res) => {
     })
    
 })
+
+server.use('/api/companies', companiesRouter)
 
 const PORT = process.env.PORT || 7000
 
